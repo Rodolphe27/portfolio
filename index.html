@@ -1,295 +1,730 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rodolphe Loic Souassi Tatang â Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-              crossorigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Lunasima&family=Montserrat&family=PT+Sans&display=swap"
-              rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-        <link rel="stylesheet" href="./assets/css/main.css" />
-        <title>integral</title>
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    </head>
+    :root {
+      --bg: #080a0d;
+      --surface: #0e1117;
+      --surface2: #141720;
+      --border: #1c2030;
+      --accent: #4f9eff;
+      --accent-dim: rgba(79,158,255,0.1);
+      --text: #cdd5e0;
+      --muted: #58647a;
+      --white: #f0f4ff;
+    }
 
-    <body class="d-flex flex-column overflow-hidden pt-5" x-data="site" style="height: 99.6vh">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm fixed-top p-3">
-            <div class="container">
-                <a class="navbar-brand" href="#">Let's build it together 🙂!</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                     aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                            Navigation
-                        </h5>
-                        <button x-ref="closeNavigation" type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <template x-for="(menu, index) in menus">
-                                <li class="nav-item">
-                                    <a x-data x-init="if(menu.id == startPage) openedPage = menu.id" class="nav-link"
-                                       :class="(openedPage == menu.id) && 'active'" href="#" x-text="menu.label"
-                                       @click="openedPage = menu.id; $refs.closeNavigation.click()"></a>
-                                </li>
-                            </template>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <main class="container w-100 h-100 overflow-hidden mt-4 position-relative">
-            <template x-for="(page, index) in pages">
-                <section x-show="openedPage == page.id" :id="page.id"
-                         class="bg-body-tertiary h-100 w-100 overflow-hidden position-absolute top-0 start-0 end-0 bottom-0"
-                         x-transition.duration.500ms>
-                    <div class="h-100" :id="`${page.id}-content`"></div>
-                </section>
-            </template>
-        </main>
-        <template x-teleport="#about-me-content">
-            <div class="d-flex h-100">
-                <div class="w-100 flex-shrink-1 overflow-y-auto h-100 p-3 px-0 px-md-5 mb-5">
-                    <h1 class="mb-3 d-md-none">About me</h1>
-                    <p><span class="text-success mb-2 d-block">My name is <b>Rodolphe Loic Souassi Tatang</b>,</span>I
-                        discovered programming at a very young age and became fascinated by the
-                        limitless possibilities that could be accomplished with just an
-                        internet connection, a computer, and a combination of learning,
-                        thinking, applying, and patience. Since then, it has become my
-                        passion and calling. 🚀
-                    </p>
-                    <p>
-                        This marked the beginning of my journey to become a valuable asset
-                        for businesses of all scales, ranging from companies to individuals
-                        and the society as a whole. I aim to contribute to
-                        <span class="text-success">building and/or enhancing products</span>
-                        that meet their specific needs!
-                    </p>
-                    <p>
-                        From an early age, I took it upon myself to explore various
-                        programming-related topics, including
-                        <span class="text-success">app development, webpages and webapps creation, UI and
-                            UX design, databases, algorithms, best practices, intuitive
-                            solutions, effective communication, and more.</span>
-                    </p>
+    html { scroll-behavior: smooth; }
 
-                    <p>
-                        I created this little corner of the internet to share the projects I've been working on—whether it's stuff from university or personal ideas I've brought to life. Feel free to look around and see what I've been up to! Stay tuned, there's always more coming! 🚀
-                    </p>
-                    <div class="bg-info-subtle p-3 rounded d-flex gap-3 mb-3">
-                        <p class="fw-bold text-black"><i class="bi bi-info-circle"></i></p>
-                        <p>
-                            Use the navigation menu at the top of the page to explore my
-                            website. I hope you have a great time! 🙂
-                        </p>
-                    </div>
-                    <div class="bg-info-subtle p-3 rounded d-flex gap-3 mb-5">
-                        <p class="fw-bold text-black"><i class="bi bi-info-circle"></i></p>
-                        <p>
-                            Don't hesitate to reach out if you need assistance with anything!
-                            I will be delighted to help you! 🙂
-                        </p>
-                    </div>
-                </div>
-                <div
-                        class="d-none d-sm-none d-md-flex flex-column text-center justify-content-center align-content-center w-50 h-100 flex-grow-0 fs-1 fw-bolder font-monospace bg-info-subtle">
-                    <i class="bi bi-info-circle"></i> About me
-                </div>
-            </div>
-        </template>
-        <template x-teleport="#projects-content">
-            <div class="d-flex h-100">
-                <div class="w-100 flex-shrink-1 overflow-y-auto h-100 p-4 p-md-4 mb-5">
-                    <h1 class="mb-4 d-md-none">Projects</h1>
-                    <div
-                            class="w-100 overflow-hidden overflow-y-auto d-flex gap-5 flex-column flex-md-row flex-wrap align-content-md-center mb-5">
-                        <template x-for="(project, index) in pages[1].content">
-                            <div class="card flex-md-fill flex-sm-grow-1 flex-md-grow-0 w-100" :id="project.id">
-                                <img :src="project.image" class="card-img-top" alt="project.id" />
-                                <div class="card-body">
-                                    <h5 class="card-title" x-text="project.title"></h5>
-                                    <p class="card-text" x-text="project.description"></p>
-                                    <template x-if="project.github.length > 0">
-                                        <div>
-                                            <span class="badge text-bg-success p-2 rounded-1 btn btn-sm"><i
-                                                    class="bi bi-door-open me-2"></i> Public</span>
-                                            <a :href="project.github" class="btn btn-sm btn-primary">See on GitHub</a>
-                                        </div>
-                                    </template>
-                                    <template x-if="project.github.length == 0">
-                                        <span class="badge text-bg-danger p-2"><i
-                                                class="bi bi-shield-lock-fill me-2"></i> Private</span>
-                                    </template>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-                <div
-                        class="d-none order-first d-md-flex flex-column text-center justify-content-center align-content-center w-50 h-100 flex-grow-0 fs-1 fw-bolder font-monospace bg-success-subtle">
-                    <i class="bi bi-hammer"></i> Projects
-                </div>
-            </div>
-        </template>
-        <template x-teleport="#competences-content">
-            <div class="d-flex h-100">
-                <div class="w-100 flex-shrink-1 overflow-y-auto h-100 p-4 p-md-4 mb-5">
-                    <h1 class="mb-4 d-md-none">Competences</h1>
-                    <div class="d-flex flex-column w-100">
-                        <section>
-                            <h3 class="mb-3">
-                                <i class="bi bi-translate me-3"></i>Languages
-                            </h3>
-                            <template x-for="lang in pages[2].content.languages">
-                                <div class="border d-flex gap-3 p-3 rounded my-5 shadow-sm bg-body">
-                                    <div class="d-flex justify-content-center align-items-start"
-                                         style="width: 25px; height: 25px">
-                                        <img :src="lang.icon" class="w-100" />
-                                    </div>
-                                    <div class="d-flex flex-column gap-3 w-100">
-                                        <h6 x-text="lang.title"></h6>
-                                        <div class="flex-nowrap d-flex border w-100 gap-0 rounded-1  bg-body-tertiary">
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'new' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="new">new</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'mid' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="middle">mid</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'int' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="intermediate">int</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'pro' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="profi">pro</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                        </section>
-                        <section>
-                            <h3 class="mb-3">
-                                <i class="bi bi-code-square me-3"></i>Programming
-                            </h3>
-                            <template x-for="lang in pages[2].content.programming">
-                                <div class="border d-flex gap-3 p-3 rounded my-5 shadow-sm bg-body">
-                                    <div class="d-flex justify-content-center align-items-start"
-                                         style="width: 25px; height: 25px">
-                                        <img :src="lang.icon" class="w-100" />
-                                    </div>
-                                    <div class="d-flex flex-column gap-3 w-100">
-                                        <h6 class="mb-3" x-text="lang.title"></h6>
-                                        <div class="flex-nowrap d-flex border w-100 gap-0 rounded-1  bg-body-tertiary">
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'new' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="new">new</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'mid' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="intermediate">mid</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'int' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="intance">int</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'pro' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="profi">pro</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                        </section>
-                        <section>
-                            <h3 class="mb-3"><i class="bi bi-tools me-3"></i>Tools</h3>
-                            <template x-for="lang in pages[2].content.tools">
-                                <div class="border d-flex gap-3 p-3 rounded my-5 shadow-sm bg-body">
-                                    <div class="d-flex justify-content-center align-items-start"
-                                         style="width: 25px; height: 25px">
-                                        <img :src="lang.icon" class="w-100" />
-                                    </div>
-                                    <div class="d-flex flex-column gap-3 w-100">
-                                        <h6 class="mb-3" x-text="lang.title"></h6>
-                                        <div class="flex-nowrap d-flex border w-100 gap-0 rounded-1  bg-body-tertiary">
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'new' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="new">new</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'mid' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="intermediate">mid</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'int' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="intance">int</span>
-                                            <span class="px-3 py-1 flex-grow-1 text-center rounded"
-                                                  :class="lang.xp == 'pro' && 'text-bg-primary fw-semibold shadow'"
-                                                  title="profi">pro</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                        </section>
-                    </div>
-                </div>
-                <div
-                        class="d-none d-md-flex flex-column text-center justify-content-center align-content-center w-50 h-100 flex-grow-0 fs-1 fw-bolder font-monospace bg-danger-subtle">
-                    <i class="bi bi-wrench-adjustable-circle"></i> Competences
-                </div>
-            </div>
-        </template>
-        <template x-teleport="#contact-me-content">
-            <div class="d-flex h-100">
-                <div
-                        class="d-flex gap-3 p-3 flex-column text-md-center justify-content-md-center align-content-md-center w-100 h-100 flex-grow-0 bg-warning-subtle p-4 p-md-0">
-                    <i class="d-none d-md-inline  bi-envelope-at" style="font-size: 2rem;"></i>
-                    <span>
-                        Can I do something for you 🙂?
-                    </span>
-                    <a class="fs-5" href="mailto:souassitatang@yahoo.com">Contact me</a>
-                </div>
-            </div>
-        </template>
-        <template x-teleport="#attributions-content">
-            <div class="d-flex h-100">
-                <div class="w-100 flex-shrink-1 overflow-y-auto h-100 p-4 p-md-4">
-                    <h1 class="mb-3 d-md-none">Attributions</h1>
-                    <div class="d-flex flex-column me-md-5">
-                        <div>
-                            <p>Made possible thanks to the contributions of:</p>
-                            <ul class="list-unstyled">
-                                <template x-for="attr in pages[4].content">
-                                    <li class="my-3">
-                                        💚 <a :href="attr.url" x-text="attr.label"></a>
-                                    </li>
-                                </template>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div
-                        class="d-none d-md-flex flex-column text-center justify-content-center align-content-center w-50 h-100 flex-grow-0 fs-1 fw-bolder font-monospace bg-danger-subtle">
-                    <i class="bi bi-wrench-adjustable-circle"></i> Attributions
-                </div>
-            </div>
-        </template>
+    body {
+      font-family: 'DM Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 0%, rgba(79,158,255,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 100%, rgba(79,158,255,0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
 
+    * { position: relative; z-index: 1; }
 
-        <script rel="text/javascript" src="assets/js/main.js"></script>
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,10,13,0.9);
+      backdrop-filter: blur(16px);
+    }
 
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-                crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/c6eaf0f9b6.js" crossorigin="anonymous"></script>
-    </body>
+    .nav-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: blink 2s ease-in-out infinite;
+    }
 
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.1s forwards;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      max-width: 820px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.2s forwards;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      margin-top: 1.75rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.9;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.32s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.44s forwards;
+    }
+
+    .hero-stack {
+      margin-top: 3.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.56s forwards;
+    }
+
+    .hero-stack-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stack-badge {
+      font-size: 0.68rem;
+      padding: 0.28rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--muted);
+      background: var(--surface);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #080a0d;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background: #7ab8ff;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(79,158,255,0.25);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* LAYOUT */
+    .section-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 3rem;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 16px; height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.025em;
+      margin-bottom: 3rem;
+      line-height: 1.1;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      padding: 1.75rem;
+      transition: background 0.2s;
+    }
+
+    .skill-group:hover { background: var(--surface2); }
+
+    .skill-group-title {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-group-title::before { content: '# '; opacity: 0.5; }
+
+    .skill-list { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+
+    .skill-tag {
+      display: inline-block;
+      padding: 0.28rem 0.6rem;
+      font-size: 0.68rem;
+      border-radius: 3px;
+      background: var(--accent-dim);
+      color: var(--text);
+      border: 1px solid rgba(79,158,255,0.15);
+    }
+
+    .skill-tag.dim {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    /* PROJECTS */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      transition: background 0.2s;
+      border-left: 2px solid transparent;
+    }
+
+    .project-card:hover {
+      background: var(--surface2);
+      border-left-color: var(--accent);
+    }
+
+    .project-num { font-size: 0.6rem; color: var(--muted); margin-bottom: 0.5rem; }
+
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+
+    .project-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.85; max-width: 580px; }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+
+    .project-links { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; flex-shrink: 0; }
+
+    .project-link {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.7rem;
+      border-radius: 3px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .project-link:hover { color: var(--accent); border-color: var(--accent); }
+    .project-link.private { opacity: 0.3; pointer-events: none; }
+
+    /* EXPERIENCE */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .exp-item {
+      background: var(--surface);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+
+    .exp-item:hover { background: var(--surface2); }
+
+    .exp-role { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); }
+    .exp-company { font-size: 0.72rem; color: var(--accent); margin: 0.25rem 0 0.8rem; }
+    .exp-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.85; }
+    .exp-date { font-size: 0.62rem; color: var(--muted); white-space: nowrap; padding-top: 0.2rem; }
+
+    /* EDUCATION */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .edu-item {
+      background: var(--surface);
+      padding: 1.75rem;
+      transition: background 0.2s;
+    }
+
+    .edu-item:hover { background: var(--surface2); }
+
+    .edu-degree { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+    .edu-school { font-size: 0.72rem; color: var(--accent); margin-bottom: 0.4rem; }
+    .edu-date { font-size: 0.62rem; color: var(--muted); }
+
+    /* CONTACT */
+    .contact-wrap {
+      text-align: center;
+      padding: 6rem 3rem;
+    }
+
+    .contact-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-sub { font-size: 0.78rem; color: var(--muted); margin-bottom: 2.5rem; }
+
+    .contact-links { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p { font-size: 0.62rem; color: var(--muted); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .section-wrap { padding: 4rem 1.5rem; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .project-card { grid-template-columns: 1fr; }
+      .project-links { flex-direction: row; }
+      .exp-item { grid-template-columns: 1fr; }
+      .contact-wrap { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.25rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-dot"></span>
+      Rodolphe LST
+    </div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-tag">Backend Developer &amp; DevOps &middot; FH Dortmund &middot; Sem. 6</p>
+    <h1>Building systems<br>that run <em>reliably.</em></h1>
+    <p class="hero-sub">
+      Computer Science student focused on backend development and DevOps. I build REST APIs with Spring Boot, containerize services with Docker, and automate workflows with GitHub Actions &mdash; based in Bochum, available in the Dortmund area.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:souassitatang@yahoo.com" class="btn btn-primary">Get in touch &rarr;</a>
+      <a href="#projects" class="btn btn-ghost">View projects</a>
+    </div>
+    <div class="hero-stack">
+      <span class="hero-stack-label">Core stack:</span>
+      <span class="stack-badge">Java</span>
+      <span class="stack-badge">Spring Boot</span>
+      <span class="stack-badge">Docker</span>
+      <span class="stack-badge">GitHub Actions</span>
+      <span class="stack-badge">PostgreSQL</span>
+      <span class="stack-badge">Linux / Bash</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-wrap" id="skills">
+    <p class="section-label reveal">Skills</p>
+    <h2 class="section-title reveal">What I work with.</h2>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <p class="skill-group-title">Backend</p>
+        <div class="skill-list">
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">C#</span>
+          <span class="skill-tag">.NET</span>
+          <span class="skill-tag">C++</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">DevOps &amp; Infrastructure</p>
+        <div class="skill-list">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Linux / Bash</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag dim">Kubernetes (learning)</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Databases</p>
+        <div class="skill-list">
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Practices &amp; Tools</p>
+        <div class="skill-list">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Scrum</span>
+          <span class="skill-tag">UML</span>
+          <span class="skill-tag">Design Patterns</span>
+          <span class="skill-tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-wrap" id="projects">
+    <p class="section-label reveal">Projects</p>
+    <h2 class="section-title reveal">Things I've built.</h2>
+    <div class="projects-list reveal">
+
+      <div class="project-card">
+        <div>
+          <p class="project-num">01</p>
+          <p class="project-title">Kids &amp; Teens App &mdash; Backend</p>
+          <p class="project-desc">
+            Built the Spring Boot REST backend for a full-stack university project. Designed RESTful endpoints, service layer, and data models. Focused on clean API structure and separation of concerns between frontend and backend.
+          </p>
+          <div class="project-tags">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">REST API</span>
+            <span class="skill-tag">SQL</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://rodolphe27.github.io/int/" class="project-link" target="_blank">Live &rarr;</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-num">02</p>
+          <p class="project-title">2D Game &mdash; C# / MonoGame</p>
+          <p class="project-desc">
+            Developed a 2D game in C# using the MonoGame framework. Implemented the game loop, entity system, collision detection, and input handling &mdash; applying OOP and GoF design patterns throughout the architecture.
+          </p>
+          <div class="project-tags">
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">MonoGame</span>
+            <span class="skill-tag">OOP</span>
+            <span class="skill-tag">Design Patterns</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <span class="project-link private">Private</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <p class="project-num">03</p>
+          <p class="project-title">Portfolio Website</p>
+          <p class="project-desc">
+            Built from scratch with vanilla HTML, CSS, and JavaScript. Deployed via GitHub Pages &mdash; auto-published on every push to main. No frameworks, no build tools.
+          </p>
+          <div class="project-tags">
+            <span class="skill-tag">HTML/CSS/JS</span>
+            <span class="skill-tag">GitHub Pages</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Rodolphe27/int" class="project-link" target="_blank">GitHub &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-wrap" id="experience">
+    <p class="section-label reveal">Experience</p>
+    <h2 class="section-title reveal">Where I've worked.</h2>
+    <div class="exp-list reveal">
+      <div class="exp-item">
+        <div>
+          <p class="exp-role">Tutor &mdash; Softwaretechnik 2</p>
+          <p class="exp-company">Fachhochschule Dortmund</p>
+          <p class="exp-desc">
+            Supported students in UML modeling, GoF design patterns, and software project implementation. Ran independent sessions and helped teams apply clean architecture principles to their backend logic.
+          </p>
+        </div>
+        <p class="exp-date">Apr 2026 &ndash; Jul 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-wrap" id="education">
+    <p class="section-label reveal">Education</p>
+    <h2 class="section-title reveal">Academic background.</h2>
+    <div class="edu-grid reveal">
+      <div class="edu-item">
+        <p class="edu-degree">B.Sc. Computer Science</p>
+        <p class="edu-school">Fachhochschule Dortmund</p>
+        <p class="edu-date">Sep 2023 &ndash; Jul 2027 (expected)</p>
+      </div>
+      <div class="edu-item">
+        <p class="edu-degree">Computer Science &mdash; bilingual</p>
+        <p class="edu-school">Ruhr-Universit&auml;t Bochum</p>
+        <p class="edu-date">Oct 2021 &ndash; Sep 2023</p>
+      </div>
+      <div class="edu-item" style="border-top:1px solid var(--border)">
+        <p class="edu-degree">Scrum Master Certificate</p>
+        <p class="edu-school">Certified &middot; 2023</p>
+        <p class="edu-date">Agile methodologies</p>
+      </div>
+      <div class="edu-item" style="border-top:1px solid var(--border)">
+        <p class="edu-degree">Languages</p>
+        <p class="edu-school">German &middot; English &middot; French</p>
+        <p class="edu-date">Fluent in DE &amp; EN</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="contact-wrap" id="contact">
+    <p class="section-label" style="justify-content:center; margin-bottom:1rem;">Contact</p>
+    <h2 class="contact-title">Open to Werkstudent roles.</h2>
+    <p class="contact-sub">Backend &amp; DevOps &middot; Dortmund / Bochum area &middot; Available now</p>
+    <div class="contact-links">
+      <a href="mailto:souassitatang@yahoo.com" class="btn btn-primary">souassitatang@yahoo.com</a>
+      <a href="https://github.com/Rodolphe27" class="btn btn-ghost" target="_blank">GitHub &rarr;</a>
+      <a href="tel:+4917697701214" class="btn btn-ghost">+49 176 977 01214</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Rodolphe Loic Souassi Tatang</p>
+    <p>Bochum, Germany &middot; Seeking Werkstudent position</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
 </html>
