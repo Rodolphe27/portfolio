@@ -350,12 +350,13 @@ nav {
 }
 
 /* ============================================================
-   PROJECTS
+   PROJECTS — card grid
    ============================================================ */
 
-.projects-list {
-  display: flex;
-  flex-direction: column;
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-auto-rows: 1fr;
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
@@ -363,59 +364,137 @@ nav {
   overflow: hidden;
 }
 
-.project-card {
+.project-tile {
   background: var(--surface);
   padding: 2rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2rem;
-  align-items: start;
-  transition: background 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 220px;
+  text-decoration: none;
+  color: inherit;
   border-left: 2px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.project-card:hover {
+.project-tile:hover {
   background: var(--surface2);
   border-left-color: var(--accent);
 }
 
-.project-num { font-size: 0.6rem; color: var(--muted); margin-bottom: 0.5rem; }
+.project-tile.featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, var(--surface2) 0%, var(--surface) 100%);
+}
 
-.project-title {
+.project-tile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-num { font-size: 0.6rem; color: var(--muted); }
+
+.project-status {
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid rgba(79, 158, 255, 0.25);
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+}
+
+.project-tile-title {
   font-family: 'Syne', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 0.6rem;
 }
 
-.project-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.85; max-width: 580px; }
-
-.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
-
-.project-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: flex-end;
-  flex-shrink: 0;
+.project-tile-desc {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.7;
+  flex: 1;
 }
 
-.project-link {
+.project-tile-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.project-tile-arrow {
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
-  text-decoration: none;
-  border: 1px solid var(--border);
-  padding: 0.35rem 0.7rem;
-  border-radius: 3px;
-  transition: all 0.2s;
-  white-space: nowrap;
+  transition: color 0.2s;
 }
 
-.project-link:hover { color: var(--accent); border-color: var(--accent); }
-.project-link.private { opacity: 0.3; pointer-events: none; }
+.project-tile:hover .project-tile-arrow { color: var(--accent); }
+
+/* ============================================================
+   PROJECT DETAIL PAGES
+   ============================================================ */
+
+.detail-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 9rem 3rem 6rem;
+}
+
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: color 0.2s;
+}
+
+.detail-back:hover { color: var(--accent); }
+
+.detail-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.detail-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.detail-body {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 2;
+  margin-bottom: 2.5rem;
+}
+
+.detail-body p + p { margin-top: 1.2rem; }
+
+.detail-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
 /* ============================================================
    EXPERIENCE
@@ -546,9 +625,9 @@ footer p { font-size: 0.62rem; color: var(--muted); }
   .hero { padding: 7rem 1.5rem 4rem; }
   .section-wrap { padding: 4rem 1.5rem; }
   .edu-grid { grid-template-columns: 1fr; }
-  .project-card { grid-template-columns: 1fr; }
-  .project-links { flex-direction: row; }
+  .project-tile.featured { grid-column: span 1; }
   .exp-item { grid-template-columns: 1fr; }
   .contact-wrap { padding: 4rem 1.5rem; }
+  .detail-wrap { padding: 7rem 1.5rem 4rem; }
   footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.25rem 1.5rem; }
 }

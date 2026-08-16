@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MCP Server — Access Rights Management &mdash; Rodolphe Loic Souassi Tatang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-dot"></span>
+      Rodolphe LST
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html#skills">Skills</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#education">Education</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="detail-wrap">
+    <a href="../index.html#projects" class="detail-back">&larr; Back to projects</a>
+
+    <p class="detail-label">Project 01 &middot; In Progress</p>
+    <h1 class="detail-title">MCP Server &mdash; Access Rights Management</h1>
+
+    <div class="detail-tags">
+      <span class="skill-tag">Java</span>
+      <span class="skill-tag">Spring Boot</span>
+      <span class="skill-tag">Spring AI</span>
+      <span class="skill-tag">RBAC</span>
+      <span class="skill-tag">PostgreSQL</span>
+    </div>
+
+    <div class="detail-body">
+      <p>
+        AI agents are increasingly given access to real tools and systems through the Model Context Protocol (MCP) &mdash; but MCP itself doesn't answer who should be allowed to call which tool. This project designs and implements role-based access control (RBAC) directly inside an MCP server, rather than relying on an external gateway that can be bypassed or misconfigured.
+      </p>
+      <p>
+        Built on Spring Boot and the Spring AI MCP Server Boot Starter, the access control layer sits directly in the request lifecycle &mdash; token validation, RBAC checks, and audit logging &mdash; and is packaged as a reusable Spring Boot starter, in the spirit of <code>spring-boot-starter-security</code>.
+      </p>
+      <p>
+        The design is evaluated against three scenarios with different trust levels and tool surfaces: an internal enterprise agent, a low-trust customer-facing agent, and a multi-agent setup where a supervisor delegates to sub-agents that need narrower permissions &mdash; the case that stresses permission-narrowing the hardest.
+      </p>
+      <p>
+        This is an ongoing Projektarbeit at FH Dortmund, feeding into a planned bachelor's thesis. No public repository yet &mdash; it'll be linked here once implementation starts.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Rodolphe Loic Souassi Tatang</p>
+    <p>Bochum, Germany &middot; Seeking Werkstudent position</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
