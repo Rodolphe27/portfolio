@@ -57,9 +57,13 @@
       <p>
         Each layer is deployed independently, on purpose, to learn how that actually works: PostgreSQL on Supabase, the Spring Boot API containerized and deployed on Railway, and the React frontend on Vercel &mdash; wired together with environment-specific config rather than one bundled Docker Compose stack (that's still how local development runs). A GitHub Actions CI pipeline type-checks and builds the frontend and builds the backend on every push.
       </p>
+      <p>
+        The demo is a real, live instance &mdash; register an account to explore it as student, teacher, or admin. It runs on free-tier hosting, so the first request after a period of inactivity can take a few seconds to wake up.
+      </p>
     </div>
 
     <div class="detail-links">
+      <a href="https://student-manager-ghost-8e17.vercel.app" class="btn btn-primary" target="_blank">Live demo &rarr;</a>
       <a href="https://github.com/Rodolphe27/student-manager" class="btn btn-ghost" target="_blank">GitHub &rarr;</a>
     </div>
   </div>
