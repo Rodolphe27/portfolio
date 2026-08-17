@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Student-Manager — Backend &mdash; Rodolphe Loic Souassi Tatang</title>
+  <title>Student-Manager — Fullstack &mdash; Rodolphe Loic Souassi Tatang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
@@ -35,20 +35,27 @@
       <span class="skill-tag">Java</span>
       <span class="skill-tag">Spring Boot</span>
       <span class="skill-tag">React</span>
+      <span class="skill-tag">TypeScript</span>
       <span class="skill-tag">PostgreSQL</span>
+      <span class="skill-tag">Supabase</span>
+      <span class="skill-tag">Railway</span>
+      <span class="skill-tag">Vercel</span>
       <span class="skill-tag">Docker</span>
       <span class="skill-tag">GitHub Actions</span>
     </div>
 
     <div class="detail-body">
       <p>
-        A full-stack student management system built for FH Dortmund, covering student, course, and enrollment management for three roles &mdash; student, teacher, and admin.
+        A full-stack student management system built for FH Dortmund, covering student, course, and enrollment management for three roles &mdash; student, teacher, and admin. The point of the project wasn't just the feature set: it was a deliberate run through the full software development lifecycle, from an issue-driven backlog through implementation, testing, containerization, CI, and independently deploying every layer.
       </p>
       <p>
-        The backend is Spring Boot 3 with JWT authentication and role-based authorization; the frontend is React 19 with TypeScript, including real-time search, status filtering, and a responsive layout that collapses into a mobile drawer below the tablet breakpoint.
+        The backend is Spring Boot 3, organized as a feature-based package structure &mdash; auth, student, course, and enrollment each own their controller, service, and repository &mdash; on top of a standard layered architecture (controller &rarr; service &rarr; repository) with persistence entities kept separate from API-facing DTOs. Authentication is stateless JWT, enforced by a custom filter in the Spring Security chain, and a centralized exception handler maps domain exceptions to consistent HTTP error responses.
       </p>
       <p>
-        Fully containerized with Docker Compose, with a GitHub Actions CI pipeline running the build on every push.
+        The frontend is React 19 with TypeScript. Auth state lives in a Context provider exposed through a custom <code>useAuth</code> hook, route access is enforced by a <code>ProtectedRoute</code> wrapper component, and every API call goes through a per-domain service layer with Axios interceptors that attach the JWT and handle 401s globally &mdash; keeping API, state, and UI concerns separate. Layout is Tailwind CSS, mobile-first, with the sidebar collapsing into a drawer below the tablet breakpoint.
+      </p>
+      <p>
+        Each layer is deployed independently, on purpose, to learn how that actually works: PostgreSQL on Supabase, the Spring Boot API containerized and deployed on Railway, and the React frontend on Vercel &mdash; wired together with environment-specific config rather than one bundled Docker Compose stack (that's still how local development runs). A GitHub Actions CI pipeline type-checks and builds the frontend and builds the backend on every push.
       </p>
     </div>
 
