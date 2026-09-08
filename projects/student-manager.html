@@ -4,10 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student-Manager &mdash; Fullstack &mdash; Rodolphe Loic Souassi Tatang</title>
+  <meta name="description" content="Full-stack student management system: Spring Boot API on Railway, React + TypeScript on Vercel, PostgreSQL on Supabase, wired together with GitHub Actions CI."/>
+  <meta name="author" content="Rodolphe Loic Souassi Tatang"/>
+  <link rel="canonical" href="https://rodolphe27.github.io/portfolio/projects/student-manager.html"/>
+  <meta name="theme-color" content="#080a0d"/>
+
+  <meta property="og:type" content="article"/>
+  <meta property="og:site_name" content="Rodolphe LST — Portfolio"/>
+  <meta property="og:url" content="https://rodolphe27.github.io/portfolio/projects/student-manager.html"/>
+  <meta property="og:title" content="Student-Manager — Fullstack"/>
+  <meta property="og:description" content="Full-stack student management system: Spring Boot API on Railway, React + TypeScript on Vercel, PostgreSQL on Supabase, wired together with CI."/>
+  <meta property="og:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Student-Manager — Fullstack"/>
+  <meta name="twitter:description" content="Full-stack student management system: Spring Boot API on Railway, React + TypeScript on Vercel, PostgreSQL on Supabase, wired together with CI."/>
+  <meta name="twitter:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css"/>
+  <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
 </head>
 <body>
 
@@ -16,13 +36,16 @@
       <span class="nav-dot"></span>
       Rodolphe LST
     </div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="../index.html#skills">Skills</a></li>
       <li><a href="../index.html#projects">Projects</a></li>
       <li><a href="../index.html#experience">Experience</a></li>
       <li><a href="../index.html#education">Education</a></li>
       <li><a href="../index.html#contact">Contact</a></li>
     </ul>
+    <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <div class="detail-wrap">
@@ -58,12 +81,12 @@
         Each layer is deployed independently, on purpose, to learn how that actually works: PostgreSQL on Supabase, the Spring Boot API containerized and deployed on Railway, and the React frontend on Vercel &mdash; wired together with environment-specific config rather than one bundled Docker Compose stack (that's still how local development runs). A GitHub Actions CI pipeline type-checks and builds the frontend and builds the backend on every push.
       </p>
       <p>
-        The demo is a real, live instance &mdash; register an account to explore it as student, teacher, or admin. It runs on free-tier hosting, so the first request after a period of inactivity can take a few seconds to wake up.
+        The demo is a real, live instance &mdash; register to explore the student experience. Self-registration always creates a student account; teacher and admin roles are assigned server-side, a deliberate guard against privilege escalation. It runs on free-tier hosting, so the first request after a period of inactivity can take a few seconds to wake up.
       </p>
     </div>
 
     <div class="detail-links">
-      <a href="https://student-manager-ghost-8e17.vercel.app" class="btn btn-primary" target="_blank">Live demo &rarr;</a>
+      <a href="https://student-manager-fh.vercel.app" class="btn btn-primary" target="_blank">Live demo &rarr;</a>
       <a href="https://github.com/Rodolphe27/student-manager" class="btn btn-ghost" target="_blank">GitHub &rarr;</a>
     </div>
   </div>
