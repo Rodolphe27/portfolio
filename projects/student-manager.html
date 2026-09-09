@@ -51,7 +51,7 @@
   <div class="detail-wrap">
     <a href="../index.html#projects" class="detail-back">&larr; Back to projects</a>
 
-    <p class="detail-label">Project 02</p>
+    <p class="detail-label">Project 02 &middot; In Progress</p>
     <h1 class="detail-title">Student-Manager &mdash; Fullstack</h1>
 
     <div class="detail-tags">
@@ -69,7 +69,7 @@
 
     <div class="detail-body">
       <p>
-        A full-stack student management system built for FH Dortmund, covering student, course, and enrollment management for three roles &mdash; student, teacher, and admin. The point of the project wasn't just the feature set: it was a deliberate run through the full software development lifecycle, from an issue-driven backlog through implementation, testing, containerization, CI, and independently deploying every layer &mdash; a learning project, not a production system, and treated with the same rigor either way.
+        A full-stack student management system built for FH Dortmund, covering student, course, and enrollment management for three roles &mdash; student, teacher, and admin. The main purpose is learning: using one project to test different technologies and to go through the full development lifecycle myself &mdash; designing an app from scratch, an issue-driven backlog, implementation, testing, containerization, CI, and independently deploying every layer to production. It is a learning project rather than a production system, and still in active development.
       </p>
       <p>
         The backend is Spring Boot 3, organized as a feature-based package structure &mdash; auth, student, course, and enrollment each own their controller, service, and repository &mdash; on top of a standard layered architecture (controller &rarr; service &rarr; repository) with persistence entities kept separate from API-facing DTOs. Authentication is stateless JWT, enforced by a custom filter in the Spring Security chain, and a centralized exception handler maps domain exceptions to consistent HTTP error responses.
