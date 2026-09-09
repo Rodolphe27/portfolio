@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>2D Game &mdash; C# / MonoGame &mdash; Rodolphe Loic Souassi Tatang</title>
-  <meta name="description" content="A 2D game built from scratch in C#/MonoGame to apply GoF design patterns — State, Observer, Strategy — to a real entity system, not to pattern-spot."/>
+  <title>2D Action Game &mdash; C# / MonoGame &mdash; Rodolphe Loic Souassi Tatang</title>
+  <meta name="description" content="A 2D action game in C# on MonoGame (.NET 8), built around a screen-based state system and GoF design patterns — the State pattern for enemy and player AI, a Factory for enemy spawning."/>
   <meta name="author" content="Rodolphe Loic Souassi Tatang"/>
   <link rel="canonical" href="https://rodolphe27.github.io/portfolio/projects/game-dev.html"/>
   <meta name="theme-color" content="#080a0d"/>
@@ -12,14 +12,14 @@
   <meta property="og:type" content="article"/>
   <meta property="og:site_name" content="Rodolphe LST — Portfolio"/>
   <meta property="og:url" content="https://rodolphe27.github.io/portfolio/projects/game-dev.html"/>
-  <meta property="og:title" content="2D Game — C# / MonoGame"/>
-  <meta property="og:description" content="A 2D game built from scratch in C#/MonoGame to apply GoF design patterns — State, Observer, Strategy — to a real entity system."/>
+  <meta property="og:title" content="2D Action Game — C# / MonoGame"/>
+  <meta property="og:description" content="A 2D action game in C# on MonoGame (.NET 8), built around a screen-based state system and GoF design patterns — the State pattern for enemy and player AI, a Factory for enemy spawning."/>
   <meta property="og:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="2D Game — C# / MonoGame"/>
-  <meta name="twitter:description" content="A 2D game built from scratch in C#/MonoGame to apply GoF design patterns — State, Observer, Strategy — to a real entity system."/>
+  <meta name="twitter:title" content="2D Action Game — C# / MonoGame"/>
+  <meta name="twitter:description" content="A 2D action game in C# on MonoGame (.NET 8), built around a screen-based state system and GoF design patterns — the State pattern for enemy and player AI, a Factory for enemy spawning."/>
   <meta name="twitter:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
 
   <link rel="icon" href="../favicon.svg" type="image/svg+xml"/>
@@ -51,25 +51,35 @@
   <div class="detail-wrap">
     <a href="../index.html#projects" class="detail-back">&larr; Back to projects</a>
 
-    <p class="detail-label">Project 03</p>
-    <h1 class="detail-title">2D Game &mdash; C# / MonoGame</h1>
+    <p class="detail-label">Project 03 &middot; In Progress</p>
+    <h1 class="detail-title">2D Action Game &mdash; C# / MonoGame</h1>
 
     <div class="detail-tags">
       <span class="skill-tag">C#</span>
       <span class="skill-tag">MonoGame</span>
-      <span class="skill-tag">OOP</span>
-      <span class="skill-tag">Design Patterns</span>
+      <span class="skill-tag">.NET 8</span>
+      <span class="skill-tag">State Pattern</span>
+      <span class="skill-tag">Factory Pattern</span>
     </div>
 
     <div class="detail-body">
       <p>
-        A 2D game built from scratch in C# using the MonoGame framework, without a higher-level engine on top.
+        A 2D action game built in C# on the MonoGame framework (DesktopGL, .NET 8), without a higher-level engine on top. It started as a university game-development project and I have kept building on it since.
       </p>
       <p>
-        Implements the core game loop, an entity system, collision detection, and input handling &mdash; with GoF design patterns (State, Observer, Strategy) applied throughout the architecture rather than bolted on afterward.
+        The code is split into clear layers: a domain layer (<code>GameMain/Domain</code>) with actors, attacks, items, tiles, traps, and collision shapes; a gameplay layer (<code>Level</code>, <code>WorldGenerator</code>, <code>LevelPlayerManager</code>); a services layer for texture and audio loading, a 2D camera, animation, and GUI; and a screen system on top.
       </p>
       <p>
-        This started as a working game and was deliberately refactored to apply those patterns correctly &mdash; the point was learning where each one actually earns its place, not pattern-spotting for its own sake.
+        Screen management &mdash; a <code>ScreenManager</code> owns a stack of <code>GameScreen</code> objects (menu, loading, gameplay, pause, game over) and handles the transitions and input routing between them, so each screen stays self-contained.
+      </p>
+      <p>
+        State pattern &mdash; enemy AI is modelled as explicit states behind an <code>IEnemyState</code> interface (patrol, chase, attack), with a separate set per enemy type: ghost, spider, and witch. The player characters use the same approach behind <code>IActorState</code> / <code>IPlayerState</code>. Behaviour changes by swapping the active state object instead of branching on flags.
+      </p>
+      <p>
+        Factory pattern &mdash; an <code>EnemyFactory</code> centralises enemy creation, so the rest of the game asks for an enemy type and gets a fully wired instance back. Collision is handled through a small hierarchy of hit shapes (<code>RectHitShape</code>, <code>CapsuleHitShape</code>) behind an <code>IHitShape</code> interface.
+      </p>
+      <p>
+        It began as a working game and is still being extended &mdash; the focus is on learning where each design pattern actually earns its place in a real codebase.
       </p>
     </div>
 
