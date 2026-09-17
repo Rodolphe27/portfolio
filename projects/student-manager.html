@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student-Manager &mdash; Fullstack &mdash; Rodolphe Loic Souassi Tatang</title>
-  <meta name="description" content="Full-stack student management system: Spring Boot API on Railway, React + TypeScript on Vercel, PostgreSQL on Supabase, wired together with GitHub Actions CI."/>
+  <meta name="description" content="Full-stack student management system: Spring Boot API, React + TypeScript frontend, PostgreSQL, built with an issue-driven backlog and GitHub Actions CI."/>
   <meta name="author" content="Rodolphe Loic Souassi Tatang"/>
   <link rel="canonical" href="https://rodolphe27.github.io/portfolio/projects/student-manager.html"/>
   <meta name="theme-color" content="#080a0d"/>
@@ -13,13 +13,13 @@
   <meta property="og:site_name" content="Rodolphe LST — Portfolio"/>
   <meta property="og:url" content="https://rodolphe27.github.io/portfolio/projects/student-manager.html"/>
   <meta property="og:title" content="Student-Manager — Fullstack"/>
-  <meta property="og:description" content="Full-stack student management system: Spring Boot API on Railway, React + TypeScript on Vercel, PostgreSQL on Supabase, wired together with CI."/>
+  <meta property="og:description" content="Full-stack student management system: Spring Boot API, React + TypeScript frontend, PostgreSQL, built with an issue-driven backlog and CI."/>
   <meta property="og:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="Student-Manager — Fullstack"/>
-  <meta name="twitter:description" content="Full-stack student management system: Spring Boot API on Railway, React + TypeScript on Vercel, PostgreSQL on Supabase, wired together with CI."/>
+  <meta name="twitter:description" content="Full-stack student management system: Spring Boot API, React + TypeScript frontend, PostgreSQL, built with an issue-driven backlog and CI."/>
   <meta name="twitter:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
 
   <link rel="icon" href="../favicon.svg" type="image/svg+xml"/>
@@ -59,16 +59,13 @@
       <span class="skill-tag">React</span>
       <span class="skill-tag">TypeScript</span>
       <span class="skill-tag">PostgreSQL</span>
-      <span class="skill-tag">Supabase</span>
-      <span class="skill-tag">Railway</span>
-      <span class="skill-tag">Vercel</span>
       <span class="skill-tag">Docker</span>
       <span class="skill-tag">GitHub Actions</span>
     </div>
 
     <div class="detail-body">
       <p>
-        A full-stack student management system built for FH Dortmund, covering student, course, and enrollment management for three roles &mdash; student, teacher, and admin. The main purpose is learning: using one project to test different technologies and to go through the full development lifecycle myself &mdash; designing an app from scratch, an issue-driven backlog, implementation, testing, containerization, CI, and independently deploying every layer to production. It is a learning project rather than a production system, and still in active development.
+        A full-stack student management system built for FH Dortmund, covering student, course, and enrollment management for three roles &mdash; student, teacher, and admin. The main purpose is learning: using one project to test different technologies and to go through the full development lifecycle myself &mdash; designing an app from scratch, an issue-driven backlog, implementation, testing, containerization, and CI. It is a learning project rather than a production system, and still in active development.
       </p>
       <p>
         The backend is Spring Boot 3, organized as a feature-based package structure &mdash; auth, student, course, and enrollment each own their controller, service, and repository &mdash; on top of a standard layered architecture (controller &rarr; service &rarr; repository) with persistence entities kept separate from API-facing DTOs. Authentication is stateless JWT, enforced by a custom filter in the Spring Security chain, and a centralized exception handler maps domain exceptions to consistent HTTP error responses.
@@ -77,16 +74,15 @@
         The frontend is React 19 with TypeScript. Auth state lives in a Context provider exposed through a custom <code>useAuth</code> hook, route access is enforced by a <code>ProtectedRoute</code> wrapper component, and every API call goes through a per-domain service layer with Axios interceptors that attach the JWT and handle 401s globally &mdash; keeping API, state, and UI concerns separate. Layout is Tailwind CSS, mobile-first, with the sidebar collapsing into a drawer below the tablet breakpoint.
       </p>
       <p>
-        Each layer is deployed independently, on purpose, to learn how that actually works: PostgreSQL on Supabase, the Spring Boot API containerized and deployed on Railway, and the React frontend on Vercel &mdash; wired together with environment-specific config rather than one bundled Docker Compose stack (that's still how local development runs). A GitHub Actions CI pipeline type-checks and builds the frontend and builds the backend on every push.
+        Local development runs on a single Docker Compose stack &mdash; Postgres, the Spring Boot API, and the React frontend wired together with environment-specific config. A GitHub Actions CI pipeline type-checks and builds the frontend and builds the backend on every push.
       </p>
       <p>
-        The demo is a real, live instance &mdash; register to explore the student experience. Self-registration always creates a student account; teacher and admin roles are assigned server-side, a deliberate guard against privilege escalation. It runs on free-tier hosting, so the first request after a period of inactivity can take a few seconds to wake up.
+        Self-registration always creates a student account; teacher and admin roles are assigned server-side, a deliberate guard against privilege escalation.
       </p>
     </div>
 
     <div class="detail-links">
-      <a href="https://student-manager-fh.vercel.app" class="btn btn-primary" target="_blank">Live demo &rarr;</a>
-      <a href="https://github.com/Rodolphe27/student-manager" class="btn btn-ghost" target="_blank">GitHub &rarr;</a>
+      <a href="https://github.com/Rodolphe27/student-manager" class="btn btn-primary" target="_blank">GitHub &rarr;</a>
     </div>
   </div>
 
