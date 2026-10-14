@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RAG Document Agent &mdash; Python &mdash; Rodolphe Loic Souassi Tatang</title>
+  <meta name="description" content="A retrieval-augmented generation system and document agent in plain Python: local multilingual embeddings, hybrid search, a retrieval evaluation tool and a tool-using agent."/>
+  <meta name="author" content="Rodolphe Loic Souassi Tatang"/>
+  <link rel="canonical" href="https://rodolphe27.github.io/portfolio/projects/rag-agent.html"/>
+  <meta name="theme-color" content="#080a0d"/>
+
+  <meta property="og:type" content="article"/>
+  <meta property="og:site_name" content="Rodolphe LST — Portfolio"/>
+  <meta property="og:url" content="https://rodolphe27.github.io/portfolio/projects/rag-agent.html"/>
+  <meta property="og:title" content="RAG Document Agent — Python"/>
+  <meta property="og:description" content="A retrieval-augmented generation system and document agent in plain Python: local multilingual embeddings, hybrid search, a retrieval evaluation tool and a tool-using agent."/>
+  <meta property="og:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="RAG Document Agent — Python"/>
+  <meta name="twitter:description" content="A retrieval-augmented generation system and document agent in plain Python: local multilingual embeddings, hybrid search, a retrieval evaluation tool and a tool-using agent."/>
+  <meta name="twitter:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-dot"></span>
+      Rodolphe LST
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#education">Education</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="detail-wrap">
+    <a href="../index.html#projects" class="detail-back">&larr; Back to projects</a>
+
+    <p class="detail-label">Project 04 &middot; In Progress</p>
+    <h1 class="detail-title">RAG Document Agent &mdash; Python</h1>
+
+    <div class="detail-tags">
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">RAG</span>
+      <span class="skill-tag">Embeddings</span>
+      <span class="skill-tag">BM25</span>
+      <span class="skill-tag">LLM agents</span>
+      <span class="skill-tag">Gemini</span>
+      <span class="skill-tag">Claude</span>
+    </div>
+
+    <div class="detail-body">
+      <p>
+        A retrieval-augmented generation (RAG) system I wrote in plain Python to understand how each part works, instead of hiding it behind a framework. It answers questions about my own documents &mdash; lecture slides, PDFs, notes &mdash; and always shows the file and page the answer came from. It connects to my bachelor-thesis topic, where an AI agent has to work with tools in a controlled way.
+      </p>
+      <p>
+        <strong>Ingest.</strong> Text and Markdown files and PDFs are read page by page with <code>pypdf</code>, so page numbers survive. The text is cut into overlapping chunks and embedded locally with a multilingual MiniLM model (<code>fastembed</code>), which works for German and English and costs nothing to run. Chunks and vectors go into one JSON index. A file hash decides what has changed, so only new or edited files are embedded again.
+      </p>
+      <p>
+        <strong>Hybrid retrieval.</strong> A question is searched in two ways: by meaning (cosine similarity on the vectors) and by keywords (BM25, written from scratch with NumPy). The two rankings are merged with Reciprocal Rank Fusion. Words are cut to six letters so that German word forms such as &ldquo;kritischem&rdquo; and &ldquo;kritische&rdquo; still meet. If no passage is close enough, the system says &ldquo;I do not know&rdquo; instead of guessing.
+      </p>
+      <p>
+        <strong>Generation.</strong> The best passages are numbered and sent to Gemini or Claude through plain REST calls. Requests retry with waiting on 429 and 5xx errors and fall back to another model when the first one stays overloaded.
+      </p>
+      <p>
+        <strong>Evaluation.</strong> A small tool measures retrieval alone, without calling a language model: does the right file and page appear in the top results (hit@1, hit@4, MRR), and are out-of-scope questions refused. This makes a change to the search something I can measure instead of guess.
+      </p>
+      <p>
+        <strong>Agent.</strong> On top of the same retrieval sits a tool-using agent. The model works in a loop with three read-only tools &mdash; list documents, search, read a page &mdash; and decides itself when to search again with other words or read a full page. It has a step limit and then must answer with citations. Tool calls are printed, so its behaviour can be followed.
+      </p>
+      <p>
+        This is a learning project and still in progress. Next step is to compare hybrid and meaning-only search on a larger set of real documents.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Rodolphe Loic Souassi Tatang</p>
+    <p>Bochum, Germany &middot; Seeking Werkstudent position</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
