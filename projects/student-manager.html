@@ -77,7 +77,7 @@
         Local development runs on a single Docker Compose stack &mdash; Postgres, the Spring Boot API, and the React frontend wired together with environment-specific config. A GitHub Actions CI pipeline lints, type-checks, tests (Vitest unit tests and Playwright end-to-end tests) and builds the frontend, and builds and tests the backend against PostgreSQL on every push.
       </p>
       <p>
-        Self-registration always creates a student account; teacher and admin roles are assigned server-side, a deliberate guard against privilege escalation.
+        There is no self-registration: accounts are created only by an admin, a deliberate guard against privilege escalation. Every API route except login requires a session; without one the API answers 401, and with the wrong role it answers 403.
       </p>
     </div>
 
