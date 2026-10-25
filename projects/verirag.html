@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VeriRAG &mdash; Verified Answers from Documents &mdash; Rodolphe Loic Souassi Tatang</title>
+  <meta name="description" content="A multi-agent question answering system in Python that checks every claim of its answer against the source documents, refuses when it cannot, and offers its search as an MCP server."/>
+  <meta name="author" content="Rodolphe Loic Souassi Tatang"/>
+  <link rel="canonical" href="https://rodolphe27.github.io/portfolio/projects/verirag.html"/>
+  <meta name="theme-color" content="#080a0d"/>
+
+  <meta property="og:type" content="article"/>
+  <meta property="og:site_name" content="Rodolphe LST — Portfolio"/>
+  <meta property="og:url" content="https://rodolphe27.github.io/portfolio/projects/verirag.html"/>
+  <meta property="og:title" content="VeriRAG — Verified Answers from Documents"/>
+  <meta property="og:description" content="A multi-agent question answering system in Python that checks every claim of its answer against the source documents, refuses when it cannot, and offers its search as an MCP server."/>
+  <meta property="og:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="VeriRAG — Verified Answers from Documents"/>
+  <meta name="twitter:description" content="A multi-agent question answering system in Python that checks every claim of its answer against the source documents, refuses when it cannot, and offers its search as an MCP server."/>
+  <meta name="twitter:image" content="https://rodolphe27.github.io/portfolio/assets/og-image.png"/>
+
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <noscript><style>.reveal{opacity:1 !important;transform:none !important;}</style></noscript>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-dot"></span>
+      Rodolphe LST
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#education">Education</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="detail-wrap">
+    <a href="../index.html#projects" class="detail-back">&larr; Back to projects</a>
+
+    <p class="detail-label">Project 04 &middot; Open source</p>
+    <h1 class="detail-title">VeriRAG &mdash; Verified Answers from Documents</h1>
+
+    <div class="detail-tags">
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">LangGraph</span>
+      <span class="skill-tag">Multi-agent</span>
+      <span class="skill-tag">RAG</span>
+      <span class="skill-tag">MCP</span>
+      <span class="skill-tag">Evaluation</span>
+      <span class="skill-tag">Docker</span>
+    </div>
+
+    <div class="detail-body">
+      <p>
+        A question answering system that checks its own answers. Most document chatbots return fluent text whether or not the documents support it. VeriRAG adds a second agent whose only job is to catch that: an answer is shown only if every claim in it is backed by a quote that really exists in a retrieved passage. Otherwise the system says it is not sure, explains why, and points to the closest text.
+      </p>
+      <p>
+        <strong>The agents.</strong> A LangGraph graph connects hybrid retrieval (local multilingual embeddings plus BM25, merged with Reciprocal Rank Fusion), a writer agent that splits its answer into single claims, and a verifier agent that must quote the proof for each claim. The code then checks that the quote is in a retrieved passage, so a made-up justification cannot pass. Failed claims go back to the writer as feedback, at most twice, and then the system refuses. Citations in the final answer come from the verified quotes, not from what the writer said.
+      </p>
+      <p>
+        <strong>Architecture.</strong> One program with strict module borders: a modular monolith with ports and adapters around the model, the search and the log. Gemini and Anthropic sit behind one interface and are switched with a setting. The dependency rules are enforced in CI with import-linter, and five decision records explain the choices and their costs.
+      </p>
+      <p>
+        <strong>Interfaces.</strong> A command line (<code>index</code>, <code>ask</code>, <code>evaluate</code>, <code>serve</code>), a Python API, an MCP server that offers the search and the verified answers as tools to AI applications, and a Docker image with the model and a sample index inside.
+      </p>
+      <p>
+        <strong>Measured, not claimed.</strong> On 35 questions about the EU AI Act (27 with an answer, 8 without), hybrid search found a correct article in the top four for 96% of the questions, against 93% for meaning-only and 74% for keyword-only search. With the whole system and Gemini, 24 of 27 questions were answered with a correct article, 3 were refused, and all 8 off-topic questions were refused. No wrong answer was released. The three false refusals are explained in the evaluation page, together with the limits: the question set is small and the wording of each answer is not graded automatically.
+      </p>
+      <p>
+        <strong>Engineering.</strong> More than 200 tests that run in seconds with scripted fake models and no network. CI runs the style check, strict type checking, the architecture rules and the tests, and also builds and smoke-tests the Docker image. The work was planned as 27 small issues on a public project board and committed in small steps.
+      </p>
+    </div>
+
+    <div class="detail-links">
+      <a href="https://github.com/Rodolphe27/verirag" class="btn btn-primary" target="_blank" rel="noopener">GitHub &rarr;</a>
+      <a href="https://github.com/users/Rodolphe27/projects/13" class="btn btn-ghost" target="_blank" rel="noopener">Project board &rarr;</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Rodolphe Loic Souassi Tatang</p>
+    <p>Bochum, Germany &middot; Seeking Werkstudent position</p>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
