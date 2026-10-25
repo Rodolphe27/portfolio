@@ -65,7 +65,7 @@
 
     <div class="detail-body">
       <p>
-        A retrieval-augmented generation (RAG) system I wrote in plain Python to understand how each part works, instead of hiding it behind a framework. It answers questions about my own documents &mdash; lecture slides, PDFs, notes &mdash; and always shows the file and page the answer came from. It connects to my bachelor-thesis topic, where an AI agent has to work with tools in a controlled way.
+        A retrieval-augmented generation (RAG) system I wrote in plain Python to understand how each part works, instead of hiding it behind a framework. It answers questions about my own documents &mdash; lecture slides, PDFs, notes &mdash; and always shows the file and page the answer came from.
       </p>
       <p>
         <strong>Ingest.</strong> Text and Markdown files and PDFs are read page by page with <code>pypdf</code>, so page numbers survive. The text is cut into overlapping chunks and embedded locally with a multilingual MiniLM model (<code>fastembed</code>), which works for German and English and costs nothing to run. Chunks and vectors go into one JSON index. A file hash decides what has changed, so only new or edited files are embedded again.
@@ -83,7 +83,7 @@
         <strong>Agent.</strong> On top of the same retrieval sits a tool-using agent. The model works in a loop with three read-only tools &mdash; list documents, search, read a page &mdash; and decides itself when to search again with other words or read a full page. It has a step limit and then must answer with citations. Tool calls are printed, so its behaviour can be followed.
       </p>
       <p>
-        This is a learning project and still in progress. Next step is to compare hybrid and meaning-only search on a larger set of real documents.
+        This is a learning project and still in progress. Its ideas were taken further in <a href="verirag.html">VeriRAG</a>, where hybrid and meaning-only search are compared on a public corpus and a second agent verifies every answer.
       </p>
     </div>
   </div>
