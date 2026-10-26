@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -50,7 +50,7 @@
   <div class="detail-wrap">
     <a href="../index.html#projects" class="detail-back">&larr; Back to projects</a>
 
-    <p class="detail-label">Project 02 &middot; In Progress</p>
+    <p class="detail-label">Project 03 &middot; In Progress</p>
     <h1 class="detail-title">Student-Manager &mdash; Fullstack</h1>
 
     <div class="detail-tags">
@@ -65,10 +65,10 @@
 
     <div class="detail-body">
       <p>
-        A simple student manager app I built to learn TypeScript and Spring Boot, covering student, course, and enrollment management for three roles &mdash; student, teacher, and admin. The main purpose is learning: using one project to test different technologies and to go through the full development lifecycle myself &mdash; designing an app from scratch, an issue-driven backlog, implementation, testing, containerization, and CI. It is a learning project rather than a production system, and still in active development.
+        A simple student manager app I built to learn TypeScript and Spring Boot, covering student, course, and enrollment management for three roles &mdash; student, teacher, and admin. The main purpose is learning: using one project to test different technologies and to go through the full development lifecycle myself &mdash; designing an app from scratch, an issue-driven backlog, implementation, testing, containerisation, and CI. It is a learning project rather than a production system, and still in active development.
       </p>
       <p>
-        The backend is Spring Boot 3, organized as a feature-based package structure &mdash; auth, student, course, and enrollment each own their controller, service, and repository &mdash; on top of a standard layered architecture (controller &rarr; service &rarr; repository) with persistence entities kept separate from API-facing DTOs. Authentication uses server-side sessions &mdash; Spring Security with Spring Session JDBC keeps each login in PostgreSQL behind an HttpOnly cookie, with CSRF protection and a clean 401-vs-403 split &mdash; and a centralized exception handler maps domain exceptions to consistent HTTP error responses.
+        The backend is Spring Boot 3, organised as a feature-based package structure &mdash; auth, student, course, and enrollment each own their controller, service, and repository &mdash; on top of a standard layered architecture (controller &rarr; service &rarr; repository) with persistence entities kept separate from API-facing DTOs. Authentication uses server-side sessions &mdash; Spring Security with Spring Session JDBC keeps each login in PostgreSQL behind an HttpOnly cookie, with CSRF protection and a clean 401-vs-403 split &mdash; and a centralised exception handler maps domain exceptions to consistent HTTP error responses.
       </p>
       <p>
         The frontend is React 19 with TypeScript. Auth state lives in a Context provider exposed through a custom <code>useAuth</code> hook, route access is enforced by a <code>ProtectedRoute</code> wrapper component, and every API call goes through a per-domain service layer on a shared Axios client that sends the session cookie and CSRF token and handles 401s globally &mdash; no credentials are kept in browser storage, and API, state, and UI concerns stay separate. Layout is Tailwind CSS, mobile-first, with the sidebar collapsing into a drawer below the tablet breakpoint.
@@ -77,7 +77,7 @@
         Local development runs on a single Docker Compose stack &mdash; Postgres, the Spring Boot API, and the React frontend wired together with environment-specific config. A GitHub Actions CI pipeline lints, type-checks, tests (Vitest unit tests and Playwright end-to-end tests) and builds the frontend, and builds and tests the backend against PostgreSQL on every push.
       </p>
       <p>
-        Self-registration always creates a student account; teacher and admin roles are assigned server-side, a deliberate guard against privilege escalation.
+        There is no self-registration: accounts are created only by an admin, a deliberate guard against privilege escalation. Every API route except login requires a session; without one the API answers 401, and with the wrong role it answers 403.
       </p>
     </div>
 
